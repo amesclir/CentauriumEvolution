@@ -1,0 +1,163 @@
+---
+title: "CentauriumEvolution"
+author: "amesclir"
+date: "04/29/2016"
+output: html_document
+---
+
+Reconstruction of character states in Centaurium
+
+```{r}
+mydata <- read.csv(file="mydata.csv")
+
+library(ape)
+library(phytools)
+mytree <- read.nexus(file="Consensusrun2LogCombinerTrees.tree")
+plot(mytree, cex = 0.5)
+
+pol1 <- mydata[,4]
+names(pol1) = mydata[,3]
+pol1
+pol2 <- mydata[,5]
+names(pol2) = mydata[,3]
+pol2
+pol3 <- mydata[,6]
+names(pol3) = mydata[,3]
+pol3
+pol4 <- mydata[,7]
+names(pol4) = mydata[,3]
+pol4
+pol5 <- mydata[,8]
+names(pol5) = mydata[,3]
+pol5
+pol6 <- mydata[,9]
+names(pol6) = mydata[,3]
+pol6
+pol7 <- mydata[,10]
+names(pol7) = mydata[,3]
+pol7
+pol8 <- mydata[,11]
+names(pol8) = mydata[,3]
+pol8
+
+
+mytree<-drop.tip(mytree,mytree$tip.label[-match(names(pol1),mytree$tip.label)])
+
+ERrerootingMethod.pol1 <- rerootingMethod(mytree, pol1, model = "ER")
+SYMrerootingMethod.pol1 <- rerootingMethod(mytree, pol1, model = "SYM")
+ARDrerootingMethod.pol1 <- rerootingMethod(mytree, pol1, model = "ARD")
+-2*ERrerootingMethod.pol1$loglik + 2
+-2*SYMrerootingMethod.pol1$loglik + 2*length(ERrerootingMethod.pol1$Q[,1])*(length(ERrerootingMethod.pol1$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol1$loglik + 2*length(ERrerootingMethod.pol1$Q[,1])*(length(ERrerootingMethod.pol1$Q[,1])-1)
+#ER is the best
+
+ERrerootingMethod.pol2 <- rerootingMethod(mytree, pol2, model = "ER")
+SYMrerootingMethod.pol2 <- rerootingMethod(mytree, pol2, model = "SYM")
+ARDrerootingMethod.pol2 <- rerootingMethod(mytree, pol2, model = "ARD")
+-2*ERrerootingMethod.pol2$loglik + 2
+-2*SYMrerootingMethod.pol2$loglik + 2*length(ERrerootingMethod.pol2$Q[,1])*(length(ERrerootingMethod.pol2$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol2$loglik + 2*length(ERrerootingMethod.pol2$Q[,1])*(length(ERrerootingMethod.pol2$Q[,1])-1)
+#ER is the best
+
+ERrerootingMethod.pol3 <- rerootingMethod(mytree, pol3, model = "ER")
+SYMrerootingMethod.pol3 <- rerootingMethod(mytree, pol3, model = "SYM")
+ARDrerootingMethod.pol3 <- rerootingMethod(mytree, pol3, model = "ARD")
+-2*ERrerootingMethod.pol3$loglik + 2
+-2*SYMrerootingMethod.pol3$loglik + 2*length(ERrerootingMethod.pol3$Q[,1])*(length(ERrerootingMethod.pol3$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol3$loglik + 2*length(ERrerootingMethod.pol3$Q[,1])*(length(ERrerootingMethod.pol3$Q[,1])-1)
+#SYM is the best
+
+ERrerootingMethod.pol4 <- rerootingMethod(mytree, pol4, model = "ER")
+SYMrerootingMethod.pol4 <- rerootingMethod(mytree, pol4, model = "SYM")
+ARDrerootingMethod.pol4 <- rerootingMethod(mytree, pol4, model = "ARD")
+-2*ERrerootingMethod.pol4$loglik + 2
+-2*SYMrerootingMethod.pol4$loglik + 2*length(ERrerootingMethod.pol4$Q[,1])*(length(ERrerootingMethod.pol4$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol4$loglik + 2*length(ERrerootingMethod.pol4$Q[,1])*(length(ERrerootingMethod.pol4$Q[,1])-1)
+#SYM is the best
+
+ERrerootingMethod.pol5 <- rerootingMethod(mytree, pol5, model = "ER")
+SYMrerootingMethod.pol5 <- rerootingMethod(mytree, pol5, model = "SYM")
+ARDrerootingMethod.pol5 <- rerootingMethod(mytree, pol5, model = "ARD")
+-2*ERrerootingMethod.pol5$loglik + 2
+-2*SYMrerootingMethod.pol5$loglik + 2*length(ERrerootingMethod.pol5$Q[,1])*(length(ERrerootingMethod.pol5$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol5$loglik + 2*length(ERrerootingMethod.pol5$Q[,1])*(length(ERrerootingMethod.pol5$Q[,1])-1)
+#ER is the best
+
+ERrerootingMethod.pol6 <- rerootingMethod(mytree, pol6, model = "ER")
+SYMrerootingMethod.pol6 <- rerootingMethod(mytree, pol6, model = "SYM")
+ARDrerootingMethod.pol6 <- rerootingMethod(mytree, pol6, model = "ARD")
+-2*ERrerootingMethod.pol6$loglik + 2
+-2*SYMrerootingMethod.pol6$loglik + 2*length(ERrerootingMethod.pol6$Q[,1])*(length(ERrerootingMethod.pol6$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol6$loglik + 2*length(ERrerootingMethod.pol6$Q[,1])*(length(ERrerootingMethod.pol6$Q[,1])-1)
+#SYM is the best
+
+ERrerootingMethod.pol7 <- rerootingMethod(mytree, pol7, model = "ER")
+SYMrerootingMethod.pol7 <- rerootingMethod(mytree, pol7, model = "SYM")
+ARDrerootingMethod.pol7 <- rerootingMethod(mytree, pol7, model = "ARD")
+-2*ERrerootingMethod.pol7$loglik + 2
+-2*SYMrerootingMethod.pol7$loglik + 2*length(ERrerootingMethod.pol7$Q[,1])*(length(ERrerootingMethod.pol7$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol7$loglik + 2*length(ERrerootingMethod.pol7$Q[,1])*(length(ERrerootingMethod.pol7$Q[,1])-1)
+#ER is the best
+
+ERrerootingMethod.pol8 <- rerootingMethod(mytree, pol8, model = "ER")
+SYMrerootingMethod.pol8 <- rerootingMethod(mytree, pol8, model = "SYM")
+ARDrerootingMethod.pol8 <- rerootingMethod(mytree, pol8, model = "ARD")
+-2*ERrerootingMethod.pol8$loglik + 2
+-2*SYMrerootingMethod.pol8$loglik + 2*length(ERrerootingMethod.pol8$Q[,1])*(length(ERrerootingMethod.pol8$Q[,1])-1)/2
+-2*ARDrerootingMethod.pol8$loglik + 2*length(ERrerootingMethod.pol8$Q[,1])*(length(ERrerootingMethod.pol8$Q[,1])-1)
+#SYM is the best
+
+mytree2 <- mytree
+mytree2$tip.label <- as.character(mydata[,1])
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green", "orange")
+tiplabels(pch=22, bg=co[as.numeric(pol1)], col=co[as.numeric(pol1)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol1$marginal.anc, piecol = c("blue","red", "green", "orange"), cex=0.3)
+legend("topleft", c("Annual","Annual - short perennial","Short perennial", "Long perennial"),pch=c(16,16,16,16,16),col=c("blue","red", "green", "orange"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol2)], col=co[as.numeric(pol2)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol2$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Low floral display","High floral display"),pch=c(16,16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green")
+tiplabels(pch=22, bg=co[as.numeric(pol3)], col=co[as.numeric(pol3)], cex=0.4, adj=1)
+nodelabels(pie=SYMrerootingMethod.pol3$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+legend("topleft", c("Big flowers","Medium size flowers","Small flowers"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green")
+tiplabels(pch=22, bg=co[as.numeric(pol4)], col=co[as.numeric(pol4)], cex=0.4, adj=1)
+nodelabels(pie=SYMrerootingMethod.pol4$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+legend("topleft", c("Small anthers","Medium size anthers","Big anthers"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol5)], col=co[as.numeric(pol5)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol5$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Radial androceous","Zygomorphic androceous"),pch=c(16,16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green")
+tiplabels(pch=22, bg=co[as.numeric(pol6)], col=co[as.numeric(pol6)], cex=0.4, adj=1)
+nodelabels(pie=SYMrerootingMethod.pol6$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+legend("topleft", c("Erectus style","slighly curved style","Curved style"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green")
+tiplabels(pch=22, bg=co[as.numeric(pol7)], col=co[as.numeric(pol7)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol7$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium herkogamy","Low herkogamy"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red", "green")
+tiplabels(pch=22, bg=co[as.numeric(pol8)], col=co[as.numeric(pol8)], cex=0.4, adj=1)
+nodelabels(pie=SYMrerootingMethod.pol8$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+legend("topleft", c("Short stigma","Medium size stigma","Long stigma"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+
+```
+
