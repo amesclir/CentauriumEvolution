@@ -1,27 +1,27 @@
 Name,Taxa,Voucher,Cicl_biol,Num_fls_pl,Lmax_flor,Lant_cerr,SimetriaAndroceo,Posic_stilo,Herkogss,Lstig
-C. pulchellum,PUL,CENT22,1,1,2,1,2,2,2,1
-C. centaurioides,CENTAURIOIDES,CENT44,1,1,1,2,2,2,2,2
-C. capense,CAPEN,CENT53,1,2,2,1,2,2,2,1
-C. mairei,MAIR,CENT75,1,1,2,1,2,2,2,1
-C. discolor,DISC,CENT25,1,1,1,2,1,1,2,2
-C. maritimum,MAR,CENT29,1,1,1,1,1,1,1,3
-C. malzacianum,MALZ,CENT72,2,1,1,2,2,2,2,2
-C. tenuifolium,TENU,CENT17,1,2,2,1,2,2,2,1
-C. serpentinicola,SERP,CENT74,1,1,1,2,2,3,3,1
-C. q. linarifolium,LIN,CENT32,4,2,1,3,2,3,1,1
-C. chloodes,CHLO,CENT26,4,1,2,1,2,2,2,1
-C. somedanum,SOM,CENT59,4,1,1,1,2,2,3,1
-C. scilloides,SCIL,CENT37,4,1,1,2,2,2,3,1
-C. littorae,LITT,CENT41,3,2,2,2,2,2,2,1
-C. m. boissieri,BOISS,CENT5,3,2,1,3,2,3,1,2
-C. q. barrelieri,BARR,CENT14,2,2,1,3,2,2,1,1
-C. q. parviflorum,PARV(=FAVARG),CENT33,2,1,3,1,2,2,3,1
-C. q. quadrifolium,"TRIP(=QUAD, =GIPS)",CENT34,2,2,2,3,2,3,2,1
-C. suffruticosum,SUFF,CENT16,3,2,2,1,1,1,1,2
-C. m. grandiflorus,GRAN,CENT6,3,2,1,2,2,3,1,2
-C. m. majus,MAJ,CENT9,3,2,1,2,2,3,1,2
-C. e. turcicum,TURC,CENT28,3,2,2,1,2,2,2,1
-C. rumelicum,RUM ,CENT36,3,2,2,1,2,2,2,1
-C. uliginosum,ULIG,CENT46,3,2,2,2,2,2,2,1
-C. e. erythraea,ERI,CENT3,3,2,2,1,2,2,2,1
-C. e. rhodense,RHO,CENT23,3,2,2,2,2,2,2,1
+C. pulchellum,PUL,CENT22,0,0,1,0,1,1,1,0
+C. centaurioides,CENTAURIOIDES,CENT44,0,0,1,0,1,1,1,0
+C. capense,CAPEN,CENT53,0,1,1,0,1,1,1,0
+C. mairei,MAIR,CENT75,0,0,1,0,1,1,1,0
+C. discolor,DISC,CENT25,0,0,0,1,0,0,1,1
+C. maritimum,MAR,CENT29,0,0,0,0,0,0,0,1
+C. malzacianum,MALZ,CENT72,0,0,0,1,1,1,1,1
+C. tenuifolium,TENU,CENT17,0,1,1,0,1,1,1,0
+C. serpentinicola,SERP,CENT74,0,0,0,1,1,1,0,0
+C. q. linarifolium,LIN,CENT32,1,1,0,1,1,1,0,0
+C. chloodes,CHLO,CENT26,1,0,1,0,1,1,1,0
+C. somedanum,SOM,CENT59,1,0,0,0,1,1,1,0
+C. scilloides,SCIL,CENT37,1,0,0,1,1,1,1,0
+C. littorale,LITT,CENT41,0,0,1,0,1,1,1,0
+C. m. boissieri,BOISS,CENT5,0,1,0,1,1,1,0,1
+C. q. barrelieri,BARR,CENT14,0,1,0,1,1,1,0,0
+C. q. parviflorum,PARV(=FAVARG),CENT33,0,0,1,0,1,1,1,0
+C. q. quadrifolium,"TRIP(=QUAD, =GIPS)",CENT34,0,1,1,1,1,1,1,0
+C. suffruticosum,SUFF,CENT16,0,1,1,0,0,0,0,1
+C. g. grandiflorum,GRAN,CENT6,0,1,0,1,1,1,0,1
+C. g. majus,MAJ,CENT9,0,1,0,1,1,1,0,1
+C. e. turcicum,TURC,CENT28,0,1,1,0,1,1,1,0
+C. rumelicum,RUM ,CENT36,0,1,1,0,1,1,1,0
+C. uliginosum,ULIG,CENT46,0,0,1,0,1,1,1,0
+C. e. erythraea,ERI,CENT3,0,1,1,0,1,1,1,0
+C. e. rhodense,RHO,CENT23,0,1,1,1,1,1,1,0

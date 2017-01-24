@@ -1,0 +1,711 @@
+---
+title: "CentauriumEvolution"
+author: "amesclir"
+date: "04/29/2016"
+output: html_document
+---
+
+Reconstruction of character states in Centaurium
+
+```{r}
+mydata <- read.csv(file="mydata.csv")
+
+library(ape)
+library(phytools)
+mytree <- read.nexus(file="ConsensusTrees.tree")
+plot(mytree, cex = 0.5)
+mytree <- drop.tip(mytree, c("CENT24","CENT20","CENT19"))
+plot(mytree, cex = 0.5)
+
+pol1 <- mydata[,4]
+names(pol1) = mydata[,3]
+pol1
+pol2 <- mydata[,5]
+names(pol2) = mydata[,3]
+pol2
+pol3 <- mydata[,6]
+names(pol3) = mydata[,3]
+pol3
+pol4 <- mydata[,7]
+names(pol4) = mydata[,3]
+pol4
+pol5 <- mydata[,8]
+names(pol5) = mydata[,3]
+pol5
+pol6 <- mydata[,9]
+names(pol6) = mydata[,3]
+pol6
+pol7 <- mydata[,10]
+names(pol7) = mydata[,3]
+pol7
+pol8 <- mydata[,11]
+names(pol8) = mydata[,3]
+pol8
+
+
+
+```
+
+
+Reconstruction of binary characters
+
+```{r}
+
+#mk2
+library(diversitree)
+mytree2 <- mytree
+mytree2$tip.label <- as.character(mydata[,1])
+
+
+lik.mk2.pol1 <- make.mk2(mytree, pol1)
+fit.mk2.pol1 <- find.mle(lik.mk2.pol1, c(.1, .1), method="subplex")
+st.mk2.pol1 <- asr.marginal(lik.mk2.pol1, coef(fit.mk2.pol1))
+fit.mk2.pol1$lnLik
+round(coef(fit.mk2.pol1), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol1 + 1)], col=co[as.numeric(pol1 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol1), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Annual or biannual","Perennial"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol1 <- constrain(lik.mk2.pol1, q10 ~ q01)
+fit.mk1.pol1 <- find.mle(lik.mk1.pol1, .1, method="subplex")
+anova(fit.mk2.pol1, mk1=fit.mk1.pol1)
+#The constrain model is worse
+st.mk1.pol1 <- asr.marginal(lik.mk1.pol1, coef(fit.mk1.pol1))
+fit.mk1.pol1$lnLik
+round(coef(fit.mk1.pol1), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol1 + 1)], col=co[as.numeric(pol1 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk1.pol1), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Annual or biannual","Perennial"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk2.pol2 <- make.mk2(mytree, pol2)
+fit.mk2.pol2 <- find.mle(lik.mk2.pol2, c(.1, .1), method="subplex")
+st.mk2.pol2 <- asr.marginal(lik.mk2.pol2, coef(fit.mk2.pol2))
+fit.mk2.pol2$lnLik
+round(coef(fit.mk2.pol2), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol2 + 1)], col=co[as.numeric(pol2 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol2), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Low floral display","High floral display"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol2 <- constrain(lik.mk2.pol2, q10 ~ q01)
+fit.mk1.pol2 <- find.mle(lik.mk1.pol2, .1, method="subplex")
+anova(fit.mk2.pol2, mk1=fit.mk1.pol2)
+#The constrain model is slightly better
+st.mk1.pol2 <- asr.marginal(lik.mk1.pol2, coef(fit.mk1.pol2))
+fit.mk1.pol2$lnLik
+round(coef(fit.mk1.pol2), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol2 + 1)], col=co[as.numeric(pol2 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol2), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Low floral display","High floral display"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol3 <- make.mk2(mytree, pol3)
+fit.mk2.pol3 <- find.mle(lik.mk2.pol3, c(.1, .1), method="subplex")
+st.mk2.pol3 <- asr.marginal(lik.mk2.pol3, coef(fit.mk2.pol3))
+fit.mk2.pol3$lnLik
+round(coef(fit.mk2.pol3), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol3 + 1)], col=co[as.numeric(pol3 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol3), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Big flowers","Medium to small flowers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol3 <- constrain(lik.mk2.pol3, q10 ~ q01)
+fit.mk1.pol3 <- find.mle(lik.mk1.pol3, .1, method="subplex")
+anova(fit.mk2.pol3, mk1=fit.mk1.pol3)
+#The constrain model is slightly better
+st.mk1.pol3 <- asr.marginal(lik.mk1.pol3, coef(fit.mk1.pol3))
+fit.mk1.pol3$lnLik
+round(coef(fit.mk1.pol3), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol3 + 1)], col=co[as.numeric(pol3 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol3), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Big flowers","Medium to small flowers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol4 <- make.mk2(mytree, pol4)
+fit.mk2.pol4 <- find.mle(lik.mk2.pol4, c(.1, .1), method="subplex")
+st.mk2.pol4 <- asr.marginal(lik.mk2.pol4, coef(fit.mk2.pol4))
+fit.mk2.pol4$lnLik
+round(coef(fit.mk2.pol4), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol4 + 1)], col=co[as.numeric(pol4 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol4), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Small anthers","Medium to big anthers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol4 <- constrain(lik.mk2.pol4, q10 ~ q01)
+fit.mk1.pol4 <- find.mle(lik.mk1.pol4, .1, method="subplex")
+anova(fit.mk2.pol4, mk1=fit.mk1.pol4)
+#The constrain model is slightly better
+st.mk1.pol4 <- asr.marginal(lik.mk1.pol4, coef(fit.mk1.pol4))
+fit.mk1.pol4$lnLik
+round(coef(fit.mk1.pol4), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol4 + 1)], col=co[as.numeric(pol4 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol4), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Small anthers","Medium to big anthers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol5 <- make.mk2(mytree, pol5)
+fit.mk2.pol5 <- find.mle(lik.mk2.pol5, c(.1, .1), method="subplex")
+st.mk2.pol5 <- asr.marginal(lik.mk2.pol5, coef(fit.mk2.pol5))
+fit.mk2.pol5$lnLik
+round(coef(fit.mk2.pol5), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol5 + 1)], col=co[as.numeric(pol5 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol5), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Radial androceous","Zygomorphic androceous"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol5 <- constrain(lik.mk2.pol5, q10 ~ q01)
+fit.mk1.pol5 <- find.mle(lik.mk1.pol5, .1, method="subplex")
+anova(fit.mk2.pol5, mk1=fit.mk1.pol5)
+#The constrain model is slightly better
+st.mk1.pol5 <- asr.marginal(lik.mk1.pol5, coef(fit.mk1.pol5))
+fit.mk1.pol5$lnLik
+round(coef(fit.mk1.pol5), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol5 + 1)], col=co[as.numeric(pol5 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol5), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Radial androceous","Zygomorphic androceous"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol6 <- make.mk2(mytree, pol6)
+fit.mk2.pol6 <- find.mle(lik.mk2.pol6, c(.1, .1), method="subplex")
+st.mk2.pol6 <- asr.marginal(lik.mk2.pol6, coef(fit.mk2.pol6))
+fit.mk2.pol6$lnLik
+round(coef(fit.mk2.pol6), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6 + 1)], col=co[as.numeric(pol6 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol6), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Erectus style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol6 <- constrain(lik.mk2.pol6, q10 ~ q01)
+fit.mk1.pol6 <- find.mle(lik.mk1.pol6, .1, method="subplex")
+anova(fit.mk2.pol6, mk1=fit.mk1.pol6)
+#The constrain model is slightly better
+st.mk1.pol6 <- asr.marginal(lik.mk1.pol6, coef(fit.mk1.pol6))
+fit.mk1.pol6$lnLik
+round(coef(fit.mk1.pol6), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6 + 1)], col=co[as.numeric(pol6 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol6), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol7 <- make.mk2(mytree, pol7)
+fit.mk2.pol7 <- find.mle(lik.mk2.pol7, c(.1, .1), method="subplex")
+st.mk2.pol7 <- asr.marginal(lik.mk2.pol7, coef(fit.mk2.pol7))
+fit.mk2.pol7$lnLik
+round(coef(fit.mk2.pol7), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7 + 1)], col=co[as.numeric(pol7 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol7), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("High herkogamy","Medium to low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol7 <- constrain(lik.mk2.pol7, q10 ~ q01)
+fit.mk1.pol7 <- find.mle(lik.mk1.pol7, .1, method="subplex")
+anova(fit.mk2.pol7, mk1=fit.mk1.pol7)
+#The constrain model is slightly worse
+st.mk1.pol7 <- asr.marginal(lik.mk1.pol7, coef(fit.mk1.pol7))
+fit.mk1.pol7$lnLik
+round(coef(fit.mk1.pol7), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7 + 1)], col=co[as.numeric(pol7 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol7), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium to low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.mk2.pol8 <- make.mk2(mytree, pol8)
+fit.mk2.pol8 <- find.mle(lik.mk2.pol8, c(.1, .1), method="subplex")
+st.mk2.pol8 <- asr.marginal(lik.mk2.pol8, coef(fit.mk2.pol8))
+fit.mk2.pol8$lnLik
+round(coef(fit.mk2.pol8), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8 + 1)], col=co[as.numeric(pol8 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol8), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Short stigma","Medium to long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.mk1.pol8 <- constrain(lik.mk2.pol8, q10 ~ q01)
+fit.mk1.pol8 <- find.mle(lik.mk1.pol8, .1, method="subplex")
+anova(fit.mk2.pol8, mk1=fit.mk1.pol8)
+#The constrain model is slightly better
+st.mk1.pol8 <- asr.marginal(lik.mk1.pol8, coef(fit.mk1.pol8))
+fit.mk1.pol8$lnLik
+round(coef(fit.mk1.pol8), 6)
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8 + 1)], col=co[as.numeric(pol8 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.mk1.pol8), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Short stigma","Medium to long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+#ML BISSE
+
+lik.bisse.pol1 <- make.bisse(mytree, pol1)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol1 <- find.mle(lik.bisse.pol1, p)
+fit.bisse.pol1$lnLik
+round(coef(fit.bisse.pol1), 6)
+st.bisse.pol1 <- asr.marginal(lik.bisse.pol1, coef(fit.bisse.pol1))
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol1 + 1)], col=co[as.numeric(pol1 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol1), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Annual or biannual","Perennial"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol1 <- constrain(lik.bisse.pol1, q10 ~ q01)
+fit.bisse5.pol1 <- find.mle(lik.bisse5.pol1, p)
+anova(fit.bisse.pol1, mk1=fit.bisse5.pol1)
+#The constrain model is worse
+
+
+lik.bisse.pol2 <- make.bisse(mytree, pol2)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol2 <- find.mle(lik.bisse.pol2, p)
+fit.bisse.pol2$lnLik
+round(coef(fit.bisse.pol2), 6)
+st.bisse.pol2 <- asr.marginal(lik.bisse.pol2, coef(fit.bisse.pol2))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol2 + 1)], col=co[as.numeric(pol2 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol2), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Low floral display","High floral display"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol2 <- constrain(lik.bisse.pol2, q10 ~ q01)
+fit.bisse5.pol2 <- find.mle(lik.bisse5.pol2, p)
+anova(fit.bisse.pol2, mk1=fit.bisse5.pol2)
+#The constrain model is slightly better
+
+
+lik.bisse.pol3 <- make.bisse(mytree, pol3)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol3 <- find.mle(lik.bisse.pol3, p)
+fit.bisse.pol3$lnLik
+round(coef(fit.bisse.pol3), 6)
+st.bisse.pol3 <- asr.marginal(lik.bisse.pol3, coef(fit.bisse.pol3))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol3 + 1)], col=co[as.numeric(pol3 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol3), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Big flowers", "Medium and small flowers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol3 <- constrain(lik.bisse.pol3, q10 ~ q01)
+fit.bisse5.pol3 <- find.mle(lik.bisse5.pol3, p)
+anova(fit.bisse.pol3, mk1=fit.bisse5.pol3)
+#The constrain model is slightly worse
+
+
+lik.bisse.pol4 <- make.bisse(mytree, pol4)
+p <- starting.point.bisse(mytree)
+p
+#Unconstrain model does not run
+#fit.bisse.pol4 <- find.mle(lik.bisse.pol4, p)
+lik.bisse.pol4 <- constrain(lik.bisse.pol4, q10 ~ q01)
+fit.bisse.pol4 <- find.mle(lik.bisse.pol4, p)
+fit.bisse.pol4$lnLik
+round(coef(fit.bisse.pol4), 6)
+st.bisse.pol4 <- asr.marginal(lik.bisse.pol4, coef(fit.bisse.pol4))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol4 + 1)], col=co[as.numeric(pol4 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol4), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Small anthers","Medium and big anthers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.bisse.pol5 <- make.bisse(mytree, pol5)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol5 <- find.mle(lik.bisse.pol5, p)
+fit.bisse.pol5$lnLik
+round(coef(fit.bisse.pol5), 6)
+st.bisse.pol5 <- asr.marginal(lik.bisse.pol5, coef(fit.bisse.pol5))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol5 + 1)], col=co[as.numeric(pol5 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol5), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Radial androceous","Zygomorphic androceous"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol5 <- constrain(lik.bisse.pol5, q10 ~ q01)
+fit.bisse5.pol5 <- find.mle(lik.bisse5.pol5, p)
+anova(fit.bisse.pol5, mk1=fit.bisse5.pol5)
+#The constrain model is slightly better
+
+
+lik.bisse.pol6 <- make.bisse(mytree, pol6)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol6 <- find.mle(lik.bisse.pol6, p)
+fit.bisse.pol6$lnLik
+round(coef(fit.bisse.pol6), 6)
+st.bisse.pol6 <- asr.marginal(lik.bisse.pol6, coef(fit.bisse.pol6))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6 + 1)], col=co[as.numeric(pol6 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol6), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol6 <- constrain(lik.bisse.pol6, q10 ~ q01)
+fit.bisse5.pol6 <- find.mle(lik.bisse5.pol6, p)
+anova(fit.bisse.pol6, mk1=fit.bisse5.pol6)
+#The constrain model is slightly better
+
+
+lik.bisse.pol7 <- make.bisse(mytree, pol7)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol7 <- find.mle(lik.bisse.pol7, p)
+fit.bisse.pol7$lnLik
+round(coef(fit.bisse.pol7), 6)
+st.bisse.pol7 <- asr.marginal(lik.bisse.pol7, coef(fit.bisse.pol7))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7 + 1)], col=co[as.numeric(pol7 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol7), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium to low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+#lik.bisse5.pol7 <- constrain(lik.bisse.pol7, q10 ~ q01)
+#fit.bisse5.pol7 <- find.mle(lik.bisse5.pol7, p)
+#anova(fit.bisse.pol7, mk1=fit.bisse5.po7)
+#The constrain model does not work because the rates are clearly different
+
+
+lik.bisse.pol8 <- make.bisse(mytree, pol8)
+p <- starting.point.bisse(mytree)
+p
+fit.bisse.pol8 <- find.mle(lik.bisse.pol8, p)
+fit.bisse.pol8$lnLik
+round(coef(fit.bisse.pol8), 6)
+st.bisse.pol8 <- asr.marginal(lik.bisse.pol8, coef(fit.bisse.pol8))
+plot(mytree2,use.edge.length=T, label.offset=1, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8 + 1)], col=co[as.numeric(pol8 + 1)], cex=0.6, adj=1)
+nodelabels(pie=t(st.bisse.pol8), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Short stigma","Medium to long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.bisse5.pol8 <- constrain(lik.bisse.pol8, q10 ~ q01)
+fit.bisse5.pol8 <- find.mle(lik.bisse5.pol8, p)
+anova(fit.bisse.pol8, mk1=fit.bisse5.pol8)
+#The constrain model is slightly better
+
+
+```
+
+
+Now we are going to calculate the phylogenetic signal of binary characters
+
+```{r}
+
+library(caper)
+
+Dtest.pol1 <- phylo.d(mydata, mytree, Voucher,Cicl_biol)
+Dtest.pol2 <- phylo.d(mydata, mytree, Voucher,Num_fls_pl)
+Dtest.pol3 <- phylo.d(mydata, mytree, Voucher,Lmax_flor)
+Dtest.pol4 <- phylo.d(mydata, mytree, Voucher,Lant_cerr)
+Dtest.pol5 <- phylo.d(mydata, mytree, Voucher,SimetriaAndroceo)
+Dtest.pol6 <- phylo.d(mydata, mytree, Voucher,Posic_stilo)
+Dtest.pol7 <- phylo.d(mydata, mytree, Voucher,Herkogss)
+Dtest.pol8 <- phylo.d(mydata, mytree, Voucher,Lstig)
+
+Dtest.pol1
+Dtest.pol2 
+Dtest.pol3
+Dtest.pol4
+Dtest.pol5
+Dtest.pol6
+Dtest.pol7
+Dtest.pol8
+```
+
+Pagel's model analyses (1984)
+
+```{r}
+
+library(phytools)
+library(ape)
+library(geiger)
+pol2[pol2 == 1]<-2
+pol2[pol2 == 0]<-1
+pol3[pol3 == 1]<-2
+pol3[pol3 == 0]<-1
+fitPagel.pol23 <- fitPagel(mytree,pol2, pol3, method="ace", model="ARD")
+
+pol6[pol6 == 1]<-2
+pol6[pol6 == 0]<-1
+fitPagel.pol26 <- fitPagel(mytree,pol2, pol6, method="ace", model="ARD")
+
+fitPagel.pol36 <- fitPagel(mytree,pol3, pol6, method="ace", model="ARD")
+
+fitPagel.pol23
+fitPagel.pol26
+fitPagel.pol36
+
+fitPagel.pol23b <- fitPagel(mytree,pol2, pol3, method="ace", model="ER")
+fitPagel.pol26b <- fitPagel(mytree,pol2, pol6, method="ace", model="ER")
+fitPagel.pol36b <- fitPagel(mytree,pol3, pol6, method="ace", model="ER")
+
+fitPagel.pol23b
+fitPagel.pol26b
+fitPagel.pol36b
+```
+
+Diversification patterns
+
+```{r}
+library(ape)
+library(laser)
+library(phytools)
+mytrees <- read.nexus("combinedTrees.trees")
+mytrees <- mytrees[8002:9001]
+mytrees2 <- list()
+for (i in 1:length(mytrees)) mytrees2[[i]] <- drop.tip(mytrees[[i]],c("CENT20", "CENT24", "CENT19"))
+class(mytrees2) <- "multiPhylo"
+mytrees2
+
+
+mltt.plot(mytrees2, dcol = F, dlty = T, legend = F, xlab = "Time", ylab = "N", log = "y", backward = TRUE, tol = 1e-4)
+for (i in 1:1001) ltt.lines(mytrees2[[i]], col = "lightgrey", backward = TRUE, tol = 1e-6)
+ltt.lines(mytree, backward = TRUE, tol = 1e-6)
+
+mytreesltt <- ltt(mytrees2, plot=F, drop.extinct=FALSE, log.lineages=TRUE, gamma=TRUE)
+mytreeslttgamma <- vector()
+for (i in 1:1000) mytreeslttgamma[i] <-  mytreesltt[[i]]$gamma
+mytreeslttp <- vector()
+for (i in 1:1000) mytreeslttp[i] <-  mytreesltt[[i]]$p
+
+mean(mytreeslttgamma)
+sd(mytreeslttgamma)
+mytreeltt <- ltt(mytree, plot=F, drop.extinct=FALSE, log.lineages=TRUE, gamma=TRUE)
+mytreeltt$gamma
+
+write.tree(mytree, file = "centaurium.tree")
+myBtimes <- getBtimes("centaurium.tree")
+
+write.tree(mytrees2, "centauriumtrees.tree")
+myBtimes.batch <- getBtimes.batch("centauriumtrees.tree")
+
+mypureBirth <- pureBirth(myBtimes)
+mybd <- bd(myBtimes)
+myDDL <- DDL(myBtimes)
+myDDX <- DDX(myBtimes)
+myyule2rate <-  yule2rate(myBtimes, ints = 100)
+myyule3rate <-  yule3rate(myBtimes, ints = 100)
+myyule4rate <- yule4rate(myBtimes, ints = 100)
+
+mypureBirth$aic
+mybd$aic
+myDDL$aic
+myDDX$aic
+myyule2rate[5]
+myyule3rate[7]
+myyule4rate[9]
+
+mypureBirth.batch <- matrix(0,1000,3)
+for (i in 1:1000) mypureBirth.batch[i,] <- unlist(pureBirth(myBtimes.batch[i,]))
+mypureBirth.batch.means <- colMeans(mypureBirth.batch)
+mypureBirth.batch.sds <- apply(mypureBirth.batch, 2, sd)
+mypureBirth.batch.means.sds <- rbind (mypureBirth.batch.means,mypureBirth.batch.sds)
+colnames(mypureBirth.batch.means.sds) = c("LH", "aic", "r1")
+rownames(mypureBirth.batch.means.sds) = c("Mean", "SD")
+mypureBirth.batch.means.sds
+
+mybd.batch <- matrix(0,1000,4)
+for (i in 1:1000) mybd.batch[i,] <- unlist(bd(myBtimes.batch[i,]))
+mybd.batch.means <- colMeans(mybd.batch)
+mybd.batch.sds <- apply(mybd.batch, 2, sd)
+mybd.batch.means.sds <- rbind (mybd.batch.means,mybd.batch.sds)
+colnames(mybd.batch.means.sds) = c("LH", "r1", "a", "aic")
+rownames(mybd.batch.means.sds) = c("Mean", "SD")
+mybd.batch.means.sds
+
+myDDL.batch <- matrix(0,1000,4)
+for (i in 1:1000) myDDL.batch[i,] <- unlist(DDL(myBtimes.batch[i,]))
+myDDL.batch.means <- colMeans(myDDL.batch)
+myDDL.batch.sds <- apply(myDDL.batch, 2, sd)
+myDDL.batch.means.sds <- rbind (myDDL.batch.means,myDDL.batch.sds)
+colnames(myDDL.batch.means.sds) = c("LH", "aic", "r1", "kparam")
+rownames(myDDL.batch.means.sds) = c("Mean", "SD")
+myDDL.batch.means.sds
+
+myDDX.batch <- matrix(0,1000,4)
+for (i in 1:1000) myDDX.batch[i,] <- unlist(DDX(myBtimes.batch[i,]))
+myDDX.batch.means <- colMeans(myDDX.batch)
+myDDX.batch.sds <- apply(myDDX.batch, 2, sd)
+myDDX.batch.means.sds <- rbind (myDDX.batch.means,myDDX.batch.sds)
+colnames(myDDX.batch.means.sds) = c("LH", "aic", "r1", "xparam")
+rownames(myDDX.batch.means.sds) = c("Mean", "SD")
+myDDX.batch.means.sds
+
+myyule2rate.batch <- matrix(0,1000,5)
+for (i in 1:1000) myyule2rate.batch[i,] <- yule2rate(myBtimes.batch[i,], ints = 100)
+myyule2rate.batch.means <- colMeans(myyule2rate.batch)
+myyule2rate.batch.sds <- apply(myyule2rate.batch, 2, sd)
+myyule2rate.batch.means.sds <- rbind (myyule2rate.batch.means,myyule2rate.batch.sds)
+colnames(myyule2rate.batch.means.sds) = names(myyule2rate)
+rownames(myyule2rate.batch.means.sds) = c("Mean", "SD")
+myyule2rate.batch.means.sds
+
+
+myyule3rate.batch <- matrix(0,1000,7)
+for (i in 1:1000) myyule3rate.batch[i,] <- yule3rate(myBtimes.batch[i,], ints = 100)
+myyule3rate.batch.means <- colMeans(myyule3rate.batch)
+myyule3rate.batch.sds <- apply(myyule3rate.batch, 2, sd)
+myyule3rate.batch.means.sds <- rbind (myyule3rate.batch.means,myyule3rate.batch.sds)
+colnames(myyule3rate.batch.means.sds) = names(myyule3rate)
+rownames(myyule3rate.batch.means.sds) = c("Mean", "SD")
+myyule3rate.batch.means.sds
+
+
+myyule3rate.batch <- matrix(0,1000,7)
+for (i in 1:1000) myyule3rate.batch[i,] <- yule3rate(myBtimes.batch[i,], ints = 100)
+myyule3rate.batch.means <- colMeans(myyule3rate.batch)
+myyule3rate.batch.sds <- apply(myyule3rate.batch, 2, sd)
+myyule3rate.batch.means.sds <- rbind (myyule3rate.batch.means,myyule3rate.batch.sds)
+colnames(myyule3rate.batch.means.sds) = names(myyule3rate)
+rownames(myyule3rate.batch.means.sds) = c("Mean", "SD")
+myyule3rate.batch.means.sds
+
+
+myyule4rate.batch <- matrix(0,1000,9)
+for (i in 1:1000) myyule4rate.batch[i,] <- yule4rate(myBtimes.batch[i,], ints = 100)
+myyule4rate.batch.means <- colMeans(myyule4rate.batch)
+myyule4rate.batch.sds <- apply(myyule4rate.batch, 2, sd)
+myyule4rate.batch.means.sds <- rbind (myyule4rate.batch.means,myyule4rate.batch.sds)
+colnames(myyule4rate.batch.means.sds) = names(myyule4rate)
+rownames(myyule4rate.batch.means.sds) = c("Mean", "SD")
+myyule4rate.batch.means.sds
+
+
+mymodels.batch <- cbind(mypureBirth.batch[,2],mybd.batch[,4],myDDL.batch[,2],myDDX.batch[,2],myyule2rate.batch[,5],myyule3rate.batch[,7],myyule4rate.batch[,9])
+colnames(mymodels.batch) = c("purebirth", "bd","DDL","DDX","yule2rate","yule3rate","yule4rate")
+colMeans(mymodels.batch)
+
+DeltaAIC <- mymodels.batch - apply(mymodels.batch,1, min) 
+ModelSelect <- DeltaAIC
+ModelSelect[!ModelSelect == 0]<-1
+
+colSums(ModelSelect)
+1-colMeans(ModelSelect)
+
+```
+
+
+Running MCMC on model mk2
+
+```{r}
+prior.exp <- make.prior.exponential(10)
+
+set.seed(1)
+samples.pol1 <- mcmc(lik.mk2.pol1, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol1 <- subset(samples.pol1, i > 10000)
+mean(samples.pol1$q01 > samples.pol1$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol1[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol1[c("q01", "q10")]), col=col)
+
+
+set.seed(3)
+samples.pol2 <- mcmc(lik.mk2.pol2, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol2 <- subset(samples.pol2, i > 10000)
+mean(samples.pol2$q01 > samples.pol2$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol2[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol2[c("q01", "q10")]), col=col)
+
+set.seed(5)
+samples.pol3 <- mcmc(lik.mk2.pol3, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol3 <- subset(samples.pol3, i > 10000)
+mean(samples.pol3$q01 > samples.pol3$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol3[c("q01", "q10")], col.line=col, las=1, legend.pos="topright",n.br = 200)
+abline(v=colMeans(samples.pol3[c("q01", "q10")]), col=col)
+
+
+set.seed(1)
+samples.pol4 <- mcmc(lik.mk2.pol4, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol4 <- subset(samples.pol4, i > 10000)
+mean(samples.pol4$q01 > samples.pol4$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol4[c("q01", "q10")], col.line=col, las=1, legend.pos="topright",n.br = 200)
+abline(v=colMeans(samples.pol4[c("q01", "q10")]), col=col)
+
+set.seed(7)
+samples.pol5 <- mcmc(lik.mk2.pol5, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol5 <- subset(samples.pol5, i > 10000)
+mean(samples.pol5$q01 > samples.pol5$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol5[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol5[c("q01", "q10")]), col=col)
+
+set.seed(9)
+samples.pol6 <- mcmc(lik.mk2.pol6, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol6 <- subset(samples.pol6, i > 10000)
+mean(samples.pol6$q01 > samples.pol6$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol6[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol6[c("q01", "q10")]), col=col)
+
+set.seed(1)
+samples.pol7 <- mcmc(lik.mk2.pol7, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol7 <- subset(samples.pol7, i > 10000)
+mean(samples.pol7$q01 > samples.pol7$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol7[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol7[c("q01", "q10")]), col=col)
+
+set.seed(1)
+samples.pol8 <- mcmc(lik.mk2.pol8, c(.1, .1), nsteps=100000, prior=prior.exp, w=.1, print.every=10000)
+samples.pol8 <- subset(samples.pol8, i > 10000)
+mean(samples.pol8$q01 > samples.pol8$q10)
+col <- c("#004165", "#eaab00") 
+profiles.plot(samples.pol8[c("q01", "q10")], col.line=col, las=1, legend.pos="topright", n.br = 200)
+abline(v=colMeans(samples.pol8[c("q01", "q10")]), col=col)
+
+
+```
+
+Running MCMC on model bisse
+
+```{r}
+prior <- make.prior.exponential(1 / (2 * (p[1] - p[3])))
+
+set.seed(1)
+tmp <- mcmc(lik.bisse.pol1, fit.bisse.pol1$par, nsteps=100, prior=prior, lower=0, w=rep(1, 6), print.every=0)
+w <- diff(sapply(tmp[2:7], range))
+w
+samples.bisse.pol1 <- mcmc(lik.bisse.pol1, fit.bisse.pol1$par, nsteps=10000, w=w, lower=0, prior=prior, print.every=1000)
+samples.bisse.pol1 <- subset(samples.bisse.pol1, i > 1000)
+col <- c("red", "orange", "blue", "purple", "black", "gray")
+profiles.plot(samples.bisse.pol1[c("q01", "q10", "lambda0", "lambda1", "mu0", "mu1")], col.line=col, las = 1, legend.pos="topright")
+abline(v=colMeans(samples.bisse.pol1[c("q01", "q10", "lambda0", "lambda1", "mu0", "mu1")]), col=col)
+
+set.seed(3)
+tmp <- mcmc(lik.bisse.pol2, fit.bisse.pol2$par, nsteps=100, prior=prior, lower=0, w=rep(1, 6), print.every=0)
+w <- diff(sapply(tmp[2:7], range))
+w
+samples.bisse.pol2 <- mcmc(lik.bisse.pol2, fit.bisse.pol2$par, nsteps=10000, w=w, lower=0, prior=prior, print.every=1000)
+samples.bisse.pol2 <- subset(samples.bisse.pol2, i > 1000)
+col <- c("red", "orange", "blue", "purple", "black", "gray")
+profiles.plot(samples.bisse.pol2[c("q01", "q10", "lambda0", "lambda1", "mu0", "mu1")], col.line=col, las = 1, legend.pos="topright")
+abline(v=colMeans(samples.bisse.pol2[c("q01", "q10", "lambda0", "lambda1", "mu0", "mu1")]), col=col)
+
+```

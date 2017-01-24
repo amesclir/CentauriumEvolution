@@ -97,7 +97,7 @@ ARDrerootingMethod.pol7 <- rerootingMethod(mytree, pol7, model = "ARD")
 -2*ERrerootingMethod.pol7$loglik + 2
 -2*SYMrerootingMethod.pol7$loglik + 2*length(ERrerootingMethod.pol7$Q[,1])*(length(ERrerootingMethod.pol7$Q[,1])-1)/2
 -2*ARDrerootingMethod.pol7$loglik + 2*length(ERrerootingMethod.pol7$Q[,1])*(length(ERrerootingMethod.pol7$Q[,1])-1)
-#ER is the best
+#SYM is the best
 
 ERrerootingMethod.pol8 <- rerootingMethod(mytree, pol8, model = "ER")
 SYMrerootingMethod.pol8 <- rerootingMethod(mytree, pol8, model = "SYM")
@@ -149,7 +149,7 @@ legend("topleft", c("Erectus style","slighly curved style","Curved style"),pch=c
 plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
 co<-c("blue","red", "green")
 tiplabels(pch=22, bg=co[as.numeric(pol7)], col=co[as.numeric(pol7)], cex=0.4, adj=1)
-nodelabels(pie=ERrerootingMethod.pol7$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
+nodelabels(pie=SYMrerootingMethod.pol7$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
 legend("topleft", c("High herkogamy","Medium herkogamy","Low herkogamy"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
 
 plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
@@ -157,6 +157,296 @@ co<-c("blue","red", "green")
 tiplabels(pch=22, bg=co[as.numeric(pol8)], col=co[as.numeric(pol8)], cex=0.4, adj=1)
 nodelabels(pie=SYMrerootingMethod.pol8$marginal.anc, piecol = c("blue","red", "green"), cex=0.3)
 legend("topleft", c("Short stigma","Medium size stigma","Long stigma"),pch=c(16,16,16),col=c("blue","red", "green"),cex=0.7)
+
+
+```
+
+Reconstruction of binary character states in Centaurium
+
+```{r}
+mydata2 <- read.csv(file="mydata2.csv")
+
+pol1b <- mydata2[,4]
+names(pol1b) = mydata2[,3]
+pol1b
+pol3b <- mydata2[,6]
+names(pol3b) = mydata2[,3]
+pol3b
+pol4b <- mydata2[,7]
+names(pol4b) = mydata2[,3]
+pol4b
+pol6b <- mydata2[,12]
+names(pol6b) = mydata2[,3]
+pol6b
+pol7b <- mydata2[,10]
+names(pol7b) = mydata2[,3]
+pol7b
+pol8b <- mydata2[,11]
+names(pol8b) = mydata2[,3]
+pol8b
+
+
+ERrerootingMethod.pol1b <- rerootingMethod(mytree, pol1b, model = "ER")
+ARDrerootingMethod.pol1b <- rerootingMethod(mytree, pol1b, model = "ARD")
+-2*ERrerootingMethod.pol1b$loglik + 2
+-2*ARDrerootingMethod.pol1b$loglik + 4
+#ER is the best
+
+ERrerootingMethod.pol3b <- rerootingMethod(mytree, pol3b, model = "ER")
+ARDrerootingMethod.pol3b <- rerootingMethod(mytree, pol3b, model = "ARD")
+-2*ERrerootingMethod.pol3b$loglik + 2
+-2*ARDrerootingMethod.pol3b$loglik + 4
+#ER is the best
+
+ERrerootingMethod.pol4b <- rerootingMethod(mytree, pol4b, model = "ER")
+ARDrerootingMethod.pol4b <- rerootingMethod(mytree, pol4b, model = "ARD")
+-2*ERrerootingMethod.pol4b$loglik + 2
+-2*ARDrerootingMethod.pol4b$loglik + 4
+#ER is the best
+
+ERrerootingMethod.pol6b <- rerootingMethod(mytree, pol6b, model = "ER")
+ARDrerootingMethod.pol6b <- rerootingMethod(mytree, pol6b, model = "ARD")
+-2*ERrerootingMethod.pol6b$loglik + 2
+-2*ARDrerootingMethod.pol6b$loglik + 4
+#ERD is the best
+
+#---------------------------
+pol6c <- mydata2[,9]
+names(pol6c) = mydata2[,3]
+pol6c
+
+ERrerootingMethod.pol6c <- rerootingMethod(mytree, pol6c, model = "ER")
+ARDrerootingMethod.pol6c <- rerootingMethod(mytree, pol6c, model = "ARD")
+-2*ERrerootingMethod.pol6c$loglik + 2
+-2*ARDrerootingMethod.pol6c$loglik + 4
+#ARD is the best
+#----------------------------
+
+ERrerootingMethod.pol7b <- rerootingMethod(mytree, pol7b, model = "ER")
+ARDrerootingMethod.pol7b <- rerootingMethod(mytree, pol7b, model = "ARD")
+-2*ERrerootingMethod.pol7b$loglik + 2
+-2*ARDrerootingMethod.pol7b$loglik + 4
+#ER is the best
+
+ERrerootingMethod.pol8b <- rerootingMethod(mytree, pol8b, model = "ER")
+ARDrerootingMethod.pol8b <- rerootingMethod(mytree, pol8b, model = "ARD")
+-2*ERrerootingMethod.pol8b$loglik + 2
+-2*ARDrerootingMethod.pol8b$loglik + 4
+#ARD is the best
+
+
+mytree2 <- mytree
+mytree2$tip.label <- as.character(mydata2[,1])
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol1b)], col=co[as.numeric(pol1b)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol1b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Annual s.s.","Other"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol3b)], col=co[as.numeric(pol3b)], cex=0.5, adj=1)
+nodelabels(pie=ERrerootingMethod.pol3b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Medium and small flowers","Big flowers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol4b)], col=co[as.numeric(pol4b)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol4b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Small anthers","Medium and big anthers"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6b)], col=co[as.numeric(pol6b)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol6b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus","Curved style and slightly curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+----
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6c)], col=co[as.numeric(pol6c)], cex=0.4, adj=1)
+nodelabels(pie=ARDrerootingMethod.pol6c$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus and slightly curved style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+-----
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7b)], col=co[as.numeric(pol7b)], cex=0.4, adj=1)
+nodelabels(pie=ERrerootingMethod.pol7b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium and low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8b)], col=co[as.numeric(pol8b)], cex=0.4, adj=1)
+nodelabels(pie=ARDrerootingMethod.pol8b$marginal.anc, piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Short stigma","Medium and long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+```
+
+Now we are going to calculate the phylogenetic signal of binary characters
+
+```{r}
+
+library(caper)
+
+Dtest.pol1b <- phylo.d(mydata2, mytree, Voucher,Cicl_biol)
+Dtest.pol2 <- phylo.d(mydata2, mytree, Voucher,Num_fls_pl)
+Dtest.pol3b <- phylo.d(mydata2, mytree, Voucher,Lmax_flor)
+Dtest.pol4b <- phylo.d(mydata2, mytree, Voucher,Lant_cerr)
+Dtest.pol5 <- phylo.d(mydata2, mytree, Voucher,SimetriaAndroceo)
+Dtest.pol6b <- phylo.d(mydata2, mytree, Voucher,Posic_stilo2)
+Dtest.pol6b.Alternative <- phylo.d(mydata2, mytree, Voucher,Posic_stilo)
+Dtest.pol7b <- phylo.d(mydata2, mytree, Voucher,Herkogss)
+Dtest.pol8b <- phylo.d(mydata2, mytree, Voucher,Lstig)
+
+Dtest.pol1b
+Dtest.pol2 
+Dtest.pol3b
+Dtest.pol4b
+Dtest.pol5
+Dtest.pol6b
+Dtest.pol6c
+Dtest.pol7b
+Dtest.pol8b
+```
+
+And now more complex models
+
+```{r}
+
+#mk2
+library(diversitree)
+pol6b[pol6b == 1]<-0
+pol6b[pol6b == 2]<-1
+
+lik.mk2.pol6b <- make.mk2(mytree, pol6b)
+fit.mk2.pol6b <- find.mle(lik.mk2.pol6b, c(.1, .1), method="subplex")
+st.mk2.pol6b <- asr.marginal(lik.mk2.pol6b, coef(fit.mk2.pol6b))
+
+fit.mk2.pol6b$lnLik
+round(coef(fit.mk2.pol6b), 6)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6b + 1)], col=co[as.numeric(pol6b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.mk2.pol6b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus style","Curved and slightly curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+pol6c[pol6c == 1]<-0
+pol6c[pol6c == 2]<-1
+lik.mk2.pol6c <- make.mk2(mytree, pol6c)
+fit.mk2.pol6c <- find.mle(lik.mk2.pol6c, c(.1, .1), method="subplex")
+st.mk2.pol6c <- asr.marginal(lik.mk2.pol6c, coef(fit.mk2.pol6c))
+
+fit.mk2.pol6c$lnLik
+round(coef(fit.mk2.pol6c), 6)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6c + 1)], col=co[as.numeric(pol6c + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.mk2.pol6c), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus and slightly curved style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+pol7b[pol7b == 1]<-0
+pol7b[pol7b == 2]<-1
+lik.mk2.pol7b <- make.mk2(mytree, pol7b)
+fit.mk2.pol7b <- find.mle(lik.mk2.pol7b, c(.1, .1), method="subplex")
+st.mk2.pol7b <- asr.marginal(lik.mk2.pol7b, coef(fit.mk2.pol7b))
+
+fit.mk2.pol7b$lnLik
+round(coef(fit.mk2.pol7b), 6)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7b + 1)], col=co[as.numeric(pol7b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.mk2.pol7b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium and low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+pol8b[pol8b == 1]<-0
+pol8b[pol8b == 2]<-1
+lik.mk2.pol8b <- make.mk2(mytree, pol8b)
+fit.mk2.pol8b <- find.mle(lik.mk2.pol8b, c(.1, .1), method="subplex")
+st.mk2.pol8b <- asr.marginal(lik.mk2.pol8b, coef(fit.mk2.pol8b))
+
+fit.mk2.pol8b$lnLik
+round(coef(fit.mk2.pol8b), 6)
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8b + 1)], col=co[as.numeric(pol8b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.mk2.pol8b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Short stigma","Medium and long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+#ML BISSE
+lik.pol6b <- make.bisse(mytree, pol6b)
+p <- starting.point.bisse(mytree)
+p
+fit.pol6b <- find.mle(lik.pol6b, p)
+fit.pol6b$lnLik
+round(coef(fit.pol6b), 6)
+
+st.pol6b <- asr.marginal(lik.pol6b, coef(fit.pol6b))
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6b + 1)], col=co[as.numeric(pol6b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.pol6b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus style","Curved and slightly curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+lik.pol6c <- make.bisse(mytree, pol6c)
+p <- starting.point.bisse(mytree)
+p
+fit.pol6c <- find.mle(lik.pol6c, p)
+fit.pol6c$lnLik
+round(coef(fit.pol6c), 6)
+
+st.pol6c <- asr.marginal(lik.pol6c, coef(fit.pol6c))
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol6c + 1)], col=co[as.numeric(pol6c + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.pol6c), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Erectus and slightly curved style","Curved style"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+lik.pol7b <- make.bisse(mytree, pol7b)
+p <- starting.point.bisse(mytree)
+p
+fit.pol7b <- find.mle(lik.pol7b, p)
+fit.pol7b$lnLik
+round(coef(fit.pol7b), 6)
+
+st.pol7b <- asr.marginal(lik.pol7b, coef(fit.pol7b))
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol7b + 1)], col=co[as.numeric(pol7b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.pol7b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("High herkogamy","Medium and low herkogamy"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+pol8b[pol8b == 1]<-0
+pol8b[pol8b == 2]<-1
+lik.pol8b <- make.bisse(mytree, pol8b)
+p <- starting.point.bisse(mytree)
+p
+fit.pol8b <- find.mle(lik.pol8b, p)
+fit.pol8b$lnLik
+round(coef(fit.pol8b), 6)
+
+st.pol8b <- asr.marginal(lik.pol8b, coef(fit.pol8b))
+
+plot(mytree2,use.edge.length=T, label.offset=1.3, no.margin=TRUE, cex=0.4)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol8b + 1)], col=co[as.numeric(pol8b + 1)], cex=0.4, adj=1)
+nodelabels(pie=t(st.pol8b), piecol = c("blue","red"), cex=0.3)
+legend("topleft", c("Short stigma","Medium and long stigma"),pch=c(16,16),col=c("blue","red"),cex=0.7)
 
 
 ```
