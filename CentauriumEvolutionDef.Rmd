@@ -709,3 +709,45 @@ profiles.plot(samples.bisse.pol2[c("q01", "q10", "lambda0", "lambda1", "mu0", "m
 abline(v=colMeans(samples.bisse.pol2[c("q01", "q10", "lambda0", "lambda1", "mu0", "mu1")]), col=col)
 
 ```
+
+
+Setting PhyloNet analyses
+
+```{r}
+library(ape)
+ITSETS <- read.nexus (file = "ITSETS.nex.con.tre")
+ITS <- read.nexus (file = "ITS.nex.con.tre")
+ETS <- read.nexus (file = "ETS.nex.con.tre")
+CPR1 <- read.nexus (file = "CPR1.nex.con.tre")
+plastid <- read.nexus (file = "plastid.nex.con.tre")
+
+tipstokeep <- ITSETS$tip.label
+tipstokeep
+ITStipstoremove <- setdiff(ITS$tip.label,tipstokeep)
+ITS <- drop.tip(ITS,ITStipstoremove)
+ETStipstoremove <- setdiff(ETS$tip.label,tipstokeep)
+ETS <- drop.tip(ETS,ETStipstoremove)
+CPR1tipstoremove <- setdiff(CPR1$tip.label,tipstokeep)
+CPR1 <- drop.tip(CPR1,CPR1tipstoremove)
+plastidtipstoremove <- setdiff(plastid$tip.label,tipstokeep)
+plastid <- drop.tip(plastid,plastidtipstoremove)
+
+trees <- list()
+trees[[1]] <- ITS
+trees[[2]] <- ETS
+trees[[3]] <- CPR1
+class(trees)<-"multiPhylo"
+trees 
+write.nexus(trees, file = "trees.nex",translate = F)
+
+trees2 <- list()
+trees2[[1]] <- ITS
+trees2[[2]] <- ETS
+trees2[[3]] <- CPR1
+trees2[[4]] <- plastid
+class(trees2)<-"multiPhylo"
+trees2
+write.nexus(trees2, file = "trees2.nex",translate = F)
+
+```
+
