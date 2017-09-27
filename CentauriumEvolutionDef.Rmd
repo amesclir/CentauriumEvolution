@@ -466,6 +466,41 @@ fitPagel.pol36b <- fitPagel(mytree,pol3, pol6, method="ace", model="ER")
 fitPagel.pol23b
 fitPagel.pol26b
 fitPagel.pol36b
+
+pol9[pol9 == 1]<-2
+pol9[pol9 == 0]<-1
+fitPagel.pol29 <- fitPagel(mytree,pol2, pol9, method="ace", model="ARD")
+fitPagel.pol39 <- fitPagel(mytree,pol3, pol9, method="ace", model="ARD")
+fitPagel.pol69 <- fitPagel(mytree,pol6, pol9, method="ace", model="ARD")
+
+fitPagel.pol29
+fitPagel.pol39
+fitPagel.pol69
+
+fitPagel.pol29b <- fitPagel(mytree,pol2, pol9, method="ace", model="ER")
+fitPagel.pol39b <- fitPagel(mytree,pol3, pol9, method="ace", model="ER")
+fitPagel.pol69b <- fitPagel(mytree,pol6, pol9, method="ace", model="ER")
+
+fitPagel.pol29b
+fitPagel.pol39b
+fitPagel.pol69b
+
+fitPagel.pol210 <- fitPagel(mytree,pol2, pol10, method="ace", model="ARD")
+fitPagel.pol310 <- fitPagel(mytree,pol3, pol10, method="ace", model="ARD")
+fitPagel.pol610 <- fitPagel(mytree,pol6, pol10, method="ace", model="ARD")
+
+fitPagel.pol210
+fitPagel.pol310
+fitPagel.pol610
+
+fitPagel.pol210b <- fitPagel(mytree,pol2, pol10, method="ace", model="ER")
+fitPagel.pol310b <- fitPagel(mytree,pol3, pol10, method="ace", model="ER")
+fitPagel.pol610b <- fitPagel(mytree,pol6, pol10, method="ace", model="ER")
+
+fitPagel.pol210b
+fitPagel.pol310b
+fitPagel.pol610b
+
 ```
 
 Diversification patterns
