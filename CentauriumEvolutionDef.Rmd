@@ -41,6 +41,9 @@ pol7
 pol8 <- mydata[,11]
 names(pol8) = mydata[,3]
 pol8
+pol9 <- mydata[,12]
+names(pol9) = mydata[,3]
+pol9
 
 
 
@@ -256,6 +259,21 @@ nodelabels(pie=t(st.mk1.pol8), piecol = c("blue","red"), cex=0.7)
 legend("topleft", c("Short stigma","Medium to long stigma"),pch=c(16,16),col=c("blue","red"),cex=1)
 
 
+lik.mk2.pol9 <- make.mk2(mytree, pol9)
+lik.mk2.pol9 <- constrain(lik.mk2.pol9, q10 ~ 0)
+fit.mk2.pol9 <- find.mle(lik.mk2.pol9, .1, method="subplex")
+st.mk2.pol9 <- asr.marginal(lik.mk2.pol9, coef(fit.mk2.pol9))
+fit.mk2.pol9$lnLik
+round(coef(fit.mk2.pol9), 6)
+plot(mytree2,use.edge.length=T, label.offset=0.5, no.margin=TRUE, cex=0.8)
+co<-c("blue","red")
+tiplabels(pch=22, bg=co[as.numeric(pol9 + 1)], col=co[as.numeric(pol9 + 1)], cex=0.8, adj=0.75)
+nodelabels(pie=t(st.mk2.pol9), piecol = c("blue","red"), cex=0.5)
+legend("topleft", c("Diploid","Polyploid"),pch=c(16,16),col=c("blue","red"),cex=0.7)
+
+
+
+
 #ML BISSE
 
 lik.bisse.pol1 <- make.bisse(mytree, pol1)
@@ -425,6 +443,7 @@ Dtest.pol5 <- phylo.d(mydata, mytree, Voucher,SimetriaAndroceo)
 Dtest.pol6 <- phylo.d(mydata, mytree, Voucher,Posic_stilo)
 Dtest.pol7 <- phylo.d(mydata, mytree, Voucher,Herkogss)
 Dtest.pol8 <- phylo.d(mydata, mytree, Voucher,Lstig)
+Dtest.pol9 <- phylo.d(mydata, mytree, Voucher,Pol)
 
 Dtest.pol1
 Dtest.pol2 
@@ -434,6 +453,8 @@ Dtest.pol5
 Dtest.pol6
 Dtest.pol7
 Dtest.pol8
+Dtest.pol9
+
 ```
 
 Pagel's model analyses (1984)
